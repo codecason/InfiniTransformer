@@ -1,6 +1,5 @@
 import os
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"  # TODO: set the GPU device
 
 import torch
 from torch.nn import functional as F
@@ -10,6 +9,14 @@ from infini_gemma import GemmaConfig
 
 print("Torch Version:", torch.__version__)
 print("CUDA:", torch.cuda.is_available())
+from huggingface_hub import login
+
+import os
+
+token = os.environ['HF_API_TOKEN']
+assert token
+
+login(token=token)
 
 if torch.cuda.is_available():
     device = "cuda:0"  # set GPU device using CUDA_VISIBLE_DEVICES
